@@ -34,3 +34,19 @@
   font-size: 16px;
   color: #64748b;
 }
+@media screen and (min-width:768px){
+  .not-found-heading{
+    font-size: 32px;
+  }
+  .not-found-description{
+    font-size: 18px;
+  }
+}
+@media  screen and (min-width:992px) {
+    .not-found-heading{
+    font-size: 38px;
+  }
+  .not-found-description{
+    font-size: 24px;
+  }
+}
