@@ -4,7 +4,7 @@ import './index.css'
 
 const Home = () => (
   <div>
-    <Header/>
+    <Header/> 
     <div className="home-container">
         <div className="home-page">
             <h1 className="main-heading">Find the job that fits your life</h1>
