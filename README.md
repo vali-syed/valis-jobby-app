@@ -2,10 +2,6 @@
 
 A modern, responsive job application platform built with React. Find your dream job and manage your applications all in one place.
 
-![React](https://img.shields.io/badge/React-19.2.3-61DAFB?logo=react&logoColor=white)
-![React Router](https://img.shields.io/badge/React_Router-7.12.0-CA4245?logo=react-router&logoColor=white)
-![License](https://img.shields.io/badge/license-MIT-blue)
-
 ---
 
 ## ✨ Features
@@ -105,9 +101,6 @@ jobbyapp/
 
 - [ ] User authentication
 - [ ] Job search functionality
-- [ ] Job application tracking
-- [ ] User profile management
-- [ ] Resume upload
 - [ ] Job filtering and sorting
 
 ---
@@ -137,13 +130,6 @@ This project is licensed under the MIT License.
 
 ---
 
-## 🙏 Acknowledgments
-
-- React team for the amazing framework
-- Create React App for the development setup
-- All contributors and supporters
-
----
 
 <div align="center">
 
