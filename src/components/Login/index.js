@@ -1,10 +1,14 @@
 import {useState} from 'react'
 import Cookies from 'js-cookie'
+import {useNavigate} from 'react-router-dom';
 import './index.css'
 
 const Login = () => {
     const [inputFieldValue,setinputField] = useState("");
     const [passwordFieldValue,setPasswordField] = useState("");
+    const [errMsg,seterrMsg] = useState("");
+
+    const navigate = useNavigate();
 
     const updateInputField = e => {
         setinputField(e.target.value);
@@ -12,6 +16,18 @@ const Login = () => {
 
     const updatePasswordField = e => {
         setPasswordField(e.target.value);
+    }
+
+    const onLoginSucess = () => {
+        setinputField("");
+        setPasswordField("");
+        seterrMsg("");
+        navigate("/",{replace:true});
+    }
+    const onLoginFailure = errorMessage =>{
+        seterrMsg(errorMessage);
+        setinputField("");
+        setPasswordField("");
     }
 
     const submitFormToLogin = async (e) => {
@@ -31,9 +47,11 @@ const Login = () => {
             const data = await response.json();
             const jwtToken = data.jwt_token;
             Cookies.set("jwt_token",jwtToken,{expires:30});
+            onLoginSucess();
         }else{
             const data = await response.json();
-            console.log(data);
+            const errorMessage = data.error_msg;
+            onLoginFailure(errorMessage);
         }
     }
 
@@ -53,6 +71,9 @@ return (
             <button type="submit" className='submit-button'>Submit</button>
         </div>
     </form>
+    <div>
+        {errMsg && <p>{errMsg}</p>}
+    </div>
   </div>
 )
 };
