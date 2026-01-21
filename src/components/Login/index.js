@@ -1,4 +1,5 @@
 import {useState} from 'react'
+import Cookies from 'js-cookie'
 import './index.css'
 
 const Login = () => {
@@ -6,21 +7,43 @@ const Login = () => {
     const [passwordFieldValue,setPasswordField] = useState("");
 
     const updateInputField = e => {
-            console.log(e.target.value);
-            setinputField(e.target.value);
+        setinputField(e.target.value);
     }
 
     const updatePasswordField = e => {
         setPasswordField(e.target.value);
     }
 
+    const submitFormToLogin = async (e) => {
+        e.preventDefault();
+        console.log("hii");
+        const userDetails = {
+            username:inputFieldValue,
+            password:passwordFieldValue
+        };
+        const url = "https://apis.ccbp.in/login";
+        const options = {
+            method:"POST",
+            body:JSON.stringify(userDetails),
+        }
+        const response = await fetch(url,options);
+        if(response.ok===true){
+            const data = await response.json();
+            const jwtToken = data.jwt_token;
+            Cookies.set("jwt_token",jwtToken,{expires:30});
+        }else{
+            const data = await response.json();
+            console.log(data);
+        }
+    }
+
 return (
   <div className='login-page'>
-    <form className='login-form'>
+    <form className='login-form' onSubmit = {submitFormToLogin}>
           <img src="https://assets.ccbp.in/frontend/react-js/logo-img.png" alt="website-logo" className='website-logo'/>
         <div className='input-field-container'>
             <label htmlFor="username" className="input-field-label">USERNAME</label>
-            <input type="text" id="username" value={inputFieldValue} onChange={updateInputField} />
+            <input type="text" id="username" autoComplete = 'on' value={inputFieldValue} onChange={updateInputField} />
         </div>
         <div className='password-field-container'>
             <label htmlFor='password' className='input-field-label'>PASSWORD</label>

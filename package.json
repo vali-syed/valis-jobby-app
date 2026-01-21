@@ -9,6 +9,7 @@
     "@testing-library/user-event": "^13.5.0",
     "dom": "^0.0.3",
     "git": "^0.1.5",
+    "js-cookie": "^3.0.5",
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
     "react-router-dom": "^7.12.0",
