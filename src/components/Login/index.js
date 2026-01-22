@@ -32,7 +32,6 @@ const Login = () => {
 
     const submitFormToLogin = async (e) => {
         e.preventDefault();
-        console.log("hii");
         const userDetails = {
             username:inputFieldValue,
             password:passwordFieldValue

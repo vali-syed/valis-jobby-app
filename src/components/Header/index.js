@@ -1,15 +1,19 @@
 import {Link} from 'react-router-dom'
 import Cookies from 'js-cookie'
-
+import {useNavigate} from 'react-router-dom'
 
 import './index.css'
 
-const onLogout = () =>{
-    Cookies.remove("jwt_token");
+const Header = () => {
 
-}
+    const navigate = useNavigate();
 
-const Header = () => (
+    const onLogout = () =>{
+        Cookies.remove("jwt_token");
+        navigate('/login',{replace:null});
+    }
+    
+    return (
     <nav className="navbar">
         <div className="nav-container">
             <Link to="/">
@@ -26,6 +30,6 @@ const Header = () => (
             <button className="logout-button" onClick={onLogout}>Logout</button>
         </div>
     </nav>
-)
+)}
 
 export default Header;
