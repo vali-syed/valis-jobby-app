@@ -8,6 +8,13 @@
     padding: 30px;
 }
 
+.err-msg{
+    color: red;
+    font-size: 12px;
+    margin-bottom:8px;
+    font-family:"Robot";
+}
+
 .login-form{
     padding: 20px;
     background-color: #272727;

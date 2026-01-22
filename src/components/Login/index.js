@@ -26,8 +26,6 @@ const Login = () => {
     }
     const onLoginFailure = errorMessage =>{
         seterrMsg(errorMessage);
-        setinputField("");
-        setPasswordField("");
     }
 
     const submitFormToLogin = async (e) => {
@@ -66,13 +64,13 @@ return (
             <label htmlFor='password' className='input-field-label'>PASSWORD</label>
             <input type="text" id="password" value={passwordFieldValue} onChange={updatePasswordField} />
         </div>
+        <div>   
+            {errMsg && <p className="err-msg">{errMsg}</p>}
+        </div>
         <div>
             <button type="submit" className='submit-button'>Submit</button>
         </div>
     </form>
-    <div>
-        {errMsg && <p>{errMsg}</p>}
-    </div>
   </div>
 )
 };
