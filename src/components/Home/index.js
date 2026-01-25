@@ -1,8 +1,16 @@
 import Header from '../Header'
+import { useNavigate } from 'react-router-dom'
 
 import './index.css'
 
-const Home = () => (
+const Home = () => {
+  const navigate = useNavigate();
+
+  const goTOJobsPage = () => {
+    navigate("/jobs",{replace:true});
+  }
+
+  return(
   <div>
     <Header/> 
     <div className="home-container">
@@ -12,10 +20,11 @@ const Home = () => (
              Millions of people are searching for jobs, salary information, company
              reviews. Find the job that fits your abilities and potential.
           </p>
-          <button className="find-jobs-button">Find Job</button>
+          <button className="find-jobs-button" onClick={goTOJobsPage}>Find Job</button>
         </div>
     </div>
   </div>
 )
+}
 
 export default Home;

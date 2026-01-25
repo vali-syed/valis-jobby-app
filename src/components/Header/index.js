@@ -11,7 +11,7 @@ const Header = () => {
     const onLogout = () =>{
         Cookies.remove("jwt_token");
         navigate('/login',{replace:null});
-    }
+    };
     
     return (
     <nav className="navbar">
@@ -25,7 +25,7 @@ const Header = () => {
             </Link>
             <ul className='nav-items'>
                 <li className="nav-item"><Link to="/">Home</Link></li>
-                <li className="nav-item">Jobs</li>
+                <li className="nav-item"><Link to="/jobs">Jobs</Link></li>
             </ul>
             <button className="logout-button" onClick={onLogout}>Logout</button>
         </div>

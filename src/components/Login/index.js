@@ -1,6 +1,6 @@
 import {useState} from 'react'
 import Cookies from 'js-cookie'
-import {useNavigate} from 'react-router-dom';
+import {useNavigate,Navigate} from 'react-router-dom';
 import './index.css'
 
 const Login = () => {
@@ -9,6 +9,12 @@ const Login = () => {
     const [errMsg,seterrMsg] = useState("");
 
     const navigate = useNavigate();
+    
+    const jwtToken = Cookies.get("jwt_token");
+    if(jwtToken){
+       return <Navigate to="/" replace/>
+    }
+
 
     const updateInputField = e => {
         setinputField(e.target.value);
@@ -22,7 +28,7 @@ const Login = () => {
         setinputField("");
         setPasswordField("");
         seterrMsg("");
-        navigate("/",{replace:true});
+        navigate("/",{replace:null});
     }
     const onLoginFailure = errorMessage =>{
         seterrMsg(errorMessage);
