@@ -2,6 +2,10 @@ import {Link} from 'react-router-dom'
 import Cookies from 'js-cookie'
 import {useNavigate} from 'react-router-dom'
 
+import { AiFillHome } from "react-icons/ai";
+import { FaBriefcase } from "react-icons/fa6";
+import { FiLogOut } from "react-icons/fi";
+
 import './index.css'
 
 const Header = () => {
@@ -25,7 +29,10 @@ const Header = () => {
             </Link>
             <ul className='nav-items'>
                 <li className="nav-item"><Link to="/">Home</Link></li>
+                <li><Link to='/' ><AiFillHome className='home-icon-sm'/></Link></li>
                 <li className="nav-item"><Link to="/jobs">Jobs</Link></li>
+                <li><Link to="/jobs"> <FaBriefcase className='job-icon-sm'/> </Link></li>
+                <li><button className='logout-button-sm'><FiLogOut className='logout-icon-sm'/></button></li>
             </ul>
             <button className="logout-button" onClick={onLogout}>Logout</button>
         </div>

@@ -1,0 +1,7 @@
+.profile-card{
+    background-image: url('https://assets.ccbp.in/frontend/react-js/profile-bg.png');
+    background-size: cover;
+    padding: 20px;
+    border-radius: 12px;
+    height: 200px;
+}

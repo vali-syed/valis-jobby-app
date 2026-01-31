@@ -21,19 +21,66 @@
     gap: 20px;
 }
 
-.nav-item{
-    color: #ffffff;
-    font-size: 20px;
-    font-weight: 500;
-}
 
 .logout-button{
-    padding: 8px 16px;
-    background-color: #4f46e5;
+    display: none;
+}
+.nav-item{
+    display: none;
+}
+
+.home-icon-sm{
+    display: block;
     color: #ffffff;
-    border: none;
-    border-radius: 8px;
+    height: 25px;
+    width: 25px;
+}
+.job-icon-sm{
+    display: block;
+    color: #ffffff;
+    height: 25px;
+    width: 25px;
+}
+.logout-button-sm{
+    display: block;
     cursor: pointer;
-    font-size: 20px;
-    font-weight: 500;
+    background-color:#272727;
+    border: 0;
+    margin-right: 5px;
+}
+.logout-icon-sm{
+    color: #ffffff;
+    height: 25px;
+    width: 25px;
+  
+}
+
+
+@media screen and (min-width:768px) {
+    .logout-button{
+        padding: 8px 16px;
+        background-color: #4f46e5;
+        color: #ffffff;
+        border: none;
+        display: block;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 20px;
+        font-weight: 500;
+    }
+    .nav-item{
+        display: block;
+        color: #ffffff;
+        font-size: 20px;
+        font-weight: 500;
+    }
+    .logout-button-sm{
+        display: none;
+    }
+    .home-icon-sm{
+        display: none;
+    }
+    .job-icon-sm{
+        display: none;
+    }
 }
