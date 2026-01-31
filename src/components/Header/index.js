@@ -28,10 +28,18 @@ const Header = () => {
             />
             </Link>
             <ul className='nav-items'>
-                <li className="nav-item"><Link to="/">Home</Link></li>
-                <li><Link to='/' ><AiFillHome className='home-icon-sm'/></Link></li>
-                <li className="nav-item"><Link to="/jobs">Jobs</Link></li>
-                <li><Link to="/jobs"> <FaBriefcase className='job-icon-sm'/> </Link></li>
+                <li className="nav-item">
+                    <Link to="/">
+                        <span className='home-text-lg'>Home</span>
+                        <AiFillHome className='home-icon-sm'/>
+                    </Link>
+                </li>
+                <li className="nav-item">
+                    <Link to="/jobs">
+                        <span className='jobs-text-lg'>Jobs</span>
+                        <FaBriefcase className='job-icon-sm'/>
+                    </Link>
+                </li>
                 <li><button className='logout-button-sm' onClick={onLogout}><FiLogOut className='logout-icon-sm'/></button></li>
             </ul>
             <button className="logout-button" onClick={onLogout}>Logout</button>
