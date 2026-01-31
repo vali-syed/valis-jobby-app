@@ -32,7 +32,7 @@ const Header = () => {
                 <li><Link to='/' ><AiFillHome className='home-icon-sm'/></Link></li>
                 <li className="nav-item"><Link to="/jobs">Jobs</Link></li>
                 <li><Link to="/jobs"> <FaBriefcase className='job-icon-sm'/> </Link></li>
-                <li><button className='logout-button-sm'><FiLogOut className='logout-icon-sm'/></button></li>
+                <li><button className='logout-button-sm' onClick={onLogout}><FiLogOut className='logout-icon-sm'/></button></li>
             </ul>
             <button className="logout-button" onClick={onLogout}>Logout</button>
         </div>

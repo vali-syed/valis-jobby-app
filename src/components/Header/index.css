@@ -10,8 +10,8 @@
 }
 
 .website-logo{
-    height: 50px;
-    width: 150px;
+    height: 40px;
+    width: 100px;
 }
 
 .nav-items{
@@ -74,6 +74,10 @@
         font-size: 20px;
         font-weight: 500;
     }
+    .website-logo{
+        height: 50px;
+        width: 150px;
+    }
     .logout-button-sm{
         display: none;
     }
@@ -83,4 +87,5 @@
     .job-icon-sm{
         display: none;
     }
+
 }
