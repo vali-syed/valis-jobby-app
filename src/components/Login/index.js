@@ -68,7 +68,7 @@ return (
         </div>
         <div className='password-field-container'>
             <label htmlFor='password' className='input-field-label'>PASSWORD</label>
-            <input type="text" id="password" value={passwordFieldValue} onChange={updatePasswordField} />
+            <input type="password" id="password" value={passwordFieldValue} onChange={updatePasswordField} />
         </div>
         <div>   
             {errMsg && <p className="err-msg">{errMsg}</p>}
