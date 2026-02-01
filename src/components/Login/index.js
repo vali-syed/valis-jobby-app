@@ -24,11 +24,11 @@ const Login = () => {
         setPasswordField(e.target.value);
     }
 
-    const onLoginSucess = () => {
+    const onLoginSuccess = () => {
         setinputField("");
         setPasswordField("");
         seterrMsg("");
-        navigate("/",{replace:null});
+        navigate("/",{replace:true});
     }
     const onLoginFailure = errorMessage =>{
         seterrMsg(errorMessage);
@@ -50,7 +50,7 @@ const Login = () => {
             const data = await response.json();
             const jwtToken = data.jwt_token;
             Cookies.set("jwt_token",jwtToken,{expires:30});
-            onLoginSucess();
+            onLoginSuccess();
         }else{
             const data = await response.json();
             const errorMessage = data.error_msg;
