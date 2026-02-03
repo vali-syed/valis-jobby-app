@@ -52,6 +52,18 @@ const FiltersGroup = () => {
                     ))
                 }
             </ul>
+            <hr className="separator"/>
+            <h1 className="filter-group-heading">Salary Range</h1>
+            <ul className="filter-group-list">
+                {
+                    salaryRangesList.map(eachItem=>(
+                        <li>
+                            <input type="radio" id={eachItem.salaryRangeId} />
+                            <label htmlFor={eachItem.salaryRangeId} className="filter-group-label">{eachItem.label}</label>
+                        </li>
+                    ))
+                }
+            </ul>
         </div>
     )
 
