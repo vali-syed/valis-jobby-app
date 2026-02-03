@@ -3,6 +3,8 @@ import ProfileDetailsComp from '../ProfileDetailsComp'
 import {useEffect,useState} from 'react'
 import Cookies from'js-cookie'
 
+import FiltersGroup from '../FiltersGroup'
+
 import './index.css'
 
 const Jobs = () => {    
@@ -44,6 +46,8 @@ const Jobs = () => {
                 <ProfileDetailsComp
                     profileDetailsOfUser={profileDetailsOfUser}
                 />
+                <hr className='separator'/>
+                <FiltersGroup />
             </div>
         )
     }

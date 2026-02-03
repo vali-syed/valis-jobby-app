@@ -18,3 +18,8 @@
     width: 30%;
     flex-shrink:0;
 }
+.separator{
+    border: 1px solid #e3e7ed;
+    margin: 20px 0px;
+    width: 100%;
+}
