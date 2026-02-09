@@ -57,7 +57,7 @@ const FiltersGroup = () => {
             <ul className="filter-group-list">
                 {
                     salaryRangesList.map(eachItem=>(
-                        <li>
+                        <li key={eachItem.salaryRangeId}>
                             <input type="radio" id={eachItem.salaryRangeId} />
                             <label htmlFor={eachItem.salaryRangeId} className="filter-group-label">{eachItem.label}</label>
                         </li>
