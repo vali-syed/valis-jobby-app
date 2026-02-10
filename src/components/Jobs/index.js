@@ -29,6 +29,8 @@ const Jobs = () => {
     const [jobsData,setJobsData] = useState([])
     const [jobsApiStatus, setJobsApiStatus] = useState(apiStatusConstants.INITIAL)
     const [searchInput, setSearchInput] = useState('')
+    const [employmentTypes, setEmploymentTypes] = useState([])
+    const [minimumPackage, setMinimumPackage] = useState('')
 
     const fetchProfileDetailsFromApi = useCallback(async () => {
         setProfileApiStatus(apiStatusConstants.IN_PROGRESS)
@@ -65,11 +67,16 @@ const Jobs = () => {
         setProfileApiStatus(apiStatusConstants.SUCCESS)
     }, [])
 
-    const fetchJobsDataFromApi = useCallback(async (search = '') => {
+    const fetchJobsDataFromApi = useCallback(async ({
+        search = '',
+        employmentTypeList = [],
+        minimumPackageValue = '',
+    } = {}) => {
         setJobsApiStatus(apiStatusConstants.IN_PROGRESS)
         try{
             const jwtToken = Cookies.get("jwt_token")
-            const apiUrl = `https://apis.ccbp.in/jobs?search=${search}`
+            const employmentTypeParam = employmentTypeList.join(',')
+            const apiUrl = `https://apis.ccbp.in/jobs?employment_type=${employmentTypeParam}&minimum_package=${minimumPackageValue}&search=${search}`
             const options = {
                 headers:{
                     Authorization : `Bearer ${jwtToken}`
@@ -109,7 +116,11 @@ const Jobs = () => {
     }
 
     const retryJobsFetch = () => {
-        fetchJobsDataFromApi(searchInput)
+        fetchJobsDataFromApi({
+            search: searchInput,
+            employmentTypeList: employmentTypes,
+            minimumPackageValue: minimumPackage,
+        })
     }
 
     const onChangeSearchInput = event => {
@@ -117,7 +128,11 @@ const Jobs = () => {
     }
 
     const onClickSearch = () => {
-        fetchJobsDataFromApi(searchInput)
+        fetchJobsDataFromApi({
+            search: searchInput,
+            employmentTypeList: employmentTypes,
+            minimumPackageValue: minimumPackage,
+        })
     }
 
     const onKeyDownSearchInput = event => {
@@ -203,9 +218,39 @@ const Jobs = () => {
         }
     }
 
+    const onChangeEmploymentType = employmentTypeId => {
+        let updatedTypes
+        if (employmentTypes.includes(employmentTypeId)) {
+            updatedTypes = employmentTypes.filter(
+                eachType => eachType !== employmentTypeId,
+            )
+        } else {
+            updatedTypes = [...employmentTypes, employmentTypeId]
+        }
+        setEmploymentTypes(updatedTypes)
+        fetchJobsDataFromApi({
+            search: searchInput,
+            employmentTypeList: updatedTypes,
+            minimumPackageValue: minimumPackage,
+        })
+    }
+
+    const onChangeSalaryRange = salaryRangeId => {
+        setMinimumPackage(salaryRangeId)
+        fetchJobsDataFromApi({
+            search: searchInput,
+            employmentTypeList: employmentTypes,
+            minimumPackageValue: salaryRangeId,
+        })
+    }
+
     useEffect(()=>{
         fetchProfileDetailsFromApi()
-        fetchJobsDataFromApi('')
+        fetchJobsDataFromApi({
+            search: '',
+            employmentTypeList: [],
+            minimumPackageValue: '',
+        })
     }, [fetchProfileDetailsFromApi, fetchJobsDataFromApi]) 
 
     return(
@@ -219,7 +264,12 @@ const Jobs = () => {
                         retryProfileFetch={retryProfileFetch}
                     />
                     <hr className='separator'/>
-                    <FiltersGroup />
+                    <FiltersGroup
+                        selectedEmploymentTypes={employmentTypes}
+                        onChangeEmploymentType={onChangeEmploymentType}
+                        selectedSalaryRange={minimumPackage}
+                        onChangeSalaryRange={onChangeSalaryRange}
+                    />
                 </div>
                 <div className="jobs-section">
                     <div className="search-container">
