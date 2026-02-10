@@ -4,6 +4,7 @@ import JobsCard from '../JobsCard'
 import {useEffect,useState,useCallback} from 'react'
 import Cookies from'js-cookie'
 import {ThreeDots} from 'react-loader-spinner'
+import {FiSearch} from 'react-icons/fi'
 
 import FiltersGroup from '../FiltersGroup'
 
@@ -27,6 +28,7 @@ const Jobs = () => {
 
     const [jobsData,setJobsData] = useState([])
     const [jobsApiStatus, setJobsApiStatus] = useState(apiStatusConstants.INITIAL)
+    const [searchInput, setSearchInput] = useState('')
 
     const fetchProfileDetailsFromApi = useCallback(async () => {
         setProfileApiStatus(apiStatusConstants.IN_PROGRESS)
@@ -63,11 +65,11 @@ const Jobs = () => {
         setProfileApiStatus(apiStatusConstants.SUCCESS)
     }, [])
 
-    const fetchJobsDataFromApi = useCallback(async () => {
+    const fetchJobsDataFromApi = useCallback(async (search = '') => {
         setJobsApiStatus(apiStatusConstants.IN_PROGRESS)
         try{
             const jwtToken = Cookies.get("jwt_token")
-            const apiUrl = 'https://apis.ccbp.in/jobs'
+            const apiUrl = `https://apis.ccbp.in/jobs?search=${search}`
             const options = {
                 headers:{
                     Authorization : `Bearer ${jwtToken}`
@@ -107,19 +109,35 @@ const Jobs = () => {
     }
 
     const retryJobsFetch = () => {
-        fetchJobsDataFromApi()
+        fetchJobsDataFromApi(searchInput)
+    }
+
+    const onChangeSearchInput = event => {
+        setSearchInput(event.target.value)
+    }
+
+    const onClickSearch = () => {
+        fetchJobsDataFromApi(searchInput)
+    }
+
+    const onKeyDownSearchInput = event => {
+        if (event.key === 'Enter') {
+            onClickSearch()
+        }
     }
 
     
     const renderJobsLoadingView = () => (
         <div className="loader-container" data-testid="loader">
-            <div><ThreeDots
+            <div>
+                <ThreeDots
                 height="50"
                 width="50"
                 color="#ffffff"
                 ariaLabel="jobs-loading"
                 visible
-            /></div>
+                />
+            </div>
         </div>
     )
 
@@ -187,7 +205,7 @@ const Jobs = () => {
 
     useEffect(()=>{
         fetchProfileDetailsFromApi()
-        fetchJobsDataFromApi()
+        fetchJobsDataFromApi('')
     }, [fetchProfileDetailsFromApi, fetchJobsDataFromApi]) 
 
     return(
@@ -204,6 +222,24 @@ const Jobs = () => {
                     <FiltersGroup />
                 </div>
                 <div className="jobs-section">
+                    <div className="search-container">
+                        <input
+                            type="search"
+                            className="search-input"
+                            placeholder="Search"
+                            value={searchInput}
+                            onChange={onChangeSearchInput}
+                            onKeyDown={onKeyDownSearchInput}
+                        />
+                        <button
+                            type="button"
+                            className="search-button"
+                            onClick={onClickSearch}
+                            data-testid="searchButton"
+                        >
+                            <FiSearch className="search-icon" />
+                        </button>
+                    </div>
                     {renderJobsSection()}
                 </div>
             </div>
