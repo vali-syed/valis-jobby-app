@@ -1,22 +1,35 @@
 import Header from '../Header'
 import ProfileDetailsComp from '../ProfileDetailsComp'
+import JobsCard from '../JobsCard'
 import {useEffect,useState,useCallback} from 'react'
 import Cookies from'js-cookie'
+import {ThreeDots} from 'react-loader-spinner'
 
 import FiltersGroup from '../FiltersGroup'
 
 import './index.css'
 
+const apiStatusConstants = {
+    INITIAL: 'INITIAL',
+    IN_PROGRESS: 'IN_PROGRESS',
+    SUCCESS: 'SUCCESS',
+    FAILURE: 'FAILURE',
+}
+
 const Jobs = () => {    
 
-    const [profileDetailsOfUser,setProfileDetails] = useState({name:'',profileImageUrl:'',shortBio:''})
+    const [profileDetailsOfUser,setProfileDetails] = useState({
+        name:'',
+        profileImageUrl:'',
+        shortBio:'',
+    })
+    const [profileApiStatus, setProfileApiStatus] = useState(apiStatusConstants.INITIAL)
+
     const [jobsData,setJobsData] = useState([])
-    const [isLoading, setIsLoading ] = useState(true)
-    const [jobsError,setJobsError] = useState(null)
-    const [profileError,setProfileError] = useState(null)
+    const [jobsApiStatus, setJobsApiStatus] = useState(apiStatusConstants.INITIAL)
 
     const fetchProfileDetailsFromApi = useCallback(async () => {
-        setProfileError(null) // Clear previous errors
+        setProfileApiStatus(apiStatusConstants.IN_PROGRESS)
         try {
             const jwtToken = Cookies.get("jwt_token");
             const url="https://apis.ccbp.in/profile"
@@ -43,16 +56,15 @@ const Jobs = () => {
             setProfileDetails(userDetails);
         }
         catch(error) {
-            setProfileError(error.message || "Failed to load profile. Please try again.")
             console.error("Profile Error:", error);
+            setProfileApiStatus(apiStatusConstants.FAILURE)
+            return
         }
-    }, []) // Empty deps - function doesn't depend on any props/state
+        setProfileApiStatus(apiStatusConstants.SUCCESS)
+    }, [])
 
-    // Fetch Jobs Data Function (can be called on mount and retry)
-    // ✅ Using useCallback because function is used in useEffect and as event handler
     const fetchJobsDataFromApi = useCallback(async () => {
-        setIsLoading(true)
-        setJobsError(null) // Clear previous errors
+        setJobsApiStatus(apiStatusConstants.IN_PROGRESS)
         try{
             const jwtToken = Cookies.get("jwt_token")
             const apiUrl = 'https://apis.ccbp.in/jobs'
@@ -70,18 +82,26 @@ const Jobs = () => {
             }
             
             const data = await response.json()
-            setJobsData(data.jobs || [])
+            const updatedJobsData = (data.jobs || []).map(eachJob => ({
+                id: eachJob.id,
+                title: eachJob.title,
+                rating: eachJob.rating,
+                companyLogoUrl: eachJob.company_logo_url,
+                employmentType: eachJob.employment_type,
+                location: eachJob.location,
+                packagePerAnnum: eachJob.package_per_annum,
+                jobDescription: eachJob.job_description,
+            }))
+            setJobsData(updatedJobsData)
         }
         catch(err){
-            setJobsError(err.message || "Something went wrong. Please try again.")
             console.error("Jobs Error:", err)
+            setJobsApiStatus(apiStatusConstants.FAILURE)
+            return
         }
-        finally{
-            setIsLoading(false)
-        }
-    }, []) // Empty deps - function doesn't depend on any props/state
+        setJobsApiStatus(apiStatusConstants.SUCCESS)
+    }, []) 
 
-    // Retry Functions - Simple wrappers
     const retryProfileFetch = () => {
         fetchProfileDetailsFromApi()
     }
@@ -90,62 +110,101 @@ const Jobs = () => {
         fetchJobsDataFromApi()
     }
 
-    // Initial fetch on component mount
+    
+    const renderJobsLoadingView = () => (
+        <div className="loader-container" data-testid="loader">
+            <div><ThreeDots
+                height="50"
+                width="50"
+                color="#ffffff"
+                ariaLabel="jobs-loading"
+                visible
+            /></div>
+        </div>
+    )
+
+    const renderNoJobsView = () => (
+        <div className="no-jobs-view">
+            <img
+                src="https://assets.ccbp.in/frontend/react-js/no-jobs-img.png"
+                alt="no jobs"
+                className="no-jobs-image"
+            />
+            <h1 className="no-jobs-heading">No Jobs Found</h1>
+            <p className="no-jobs-description">
+                We could not find any jobs. Try other filters.
+            </p>
+        </div>
+    )
+
+    const renderJobsFailureView = () => (
+        <div className="jobs-failure-view">
+            <img
+                src="https://assets.ccbp.in/frontend/react-js/failure-img.png"
+                alt="failure view"
+                className="jobs-failure-image"
+            />
+            <h1 className="failure-heading">Oops! Something Went Wrong</h1>
+            <p className="failure-description">
+                We cannot seem to find the page you are looking for.
+            </p>
+            <button
+                type="button"
+                onClick={retryJobsFetch}
+                className="retry-button"
+            >
+                Retry
+            </button>
+        </div>
+    )
+
+    const renderJobsListView = () => {
+        if (jobsData.length === 0) {
+            return renderNoJobsView()
+        }
+
+        return (
+            <ul className="jobs-list">
+                {jobsData.map(eachJob => (
+                    <JobsCard key={eachJob.id} jobDetails={eachJob} />
+                ))}
+            </ul>
+        )
+    }
+
+    const renderJobsSection = () => {
+        switch (jobsApiStatus) {
+            case apiStatusConstants.IN_PROGRESS:
+                return renderJobsLoadingView()
+            case apiStatusConstants.SUCCESS:
+                return renderJobsListView()
+            case apiStatusConstants.FAILURE:
+                return renderJobsFailureView()
+            default:
+                return null
+        }
+    }
+
     useEffect(()=>{
         fetchProfileDetailsFromApi()
         fetchJobsDataFromApi()
-    }, [fetchProfileDetailsFromApi, fetchJobsDataFromApi]) // ✅ Now safe to include in deps
+    }, [fetchProfileDetailsFromApi, fetchJobsDataFromApi]) 
 
     return(
         <div>
             <Header/>
             <div className='job-page-container'>
-                <div>
-                    <div className='side-bar'>
-                        {profileError ? (
-                            <div className="error-container">
-                                <p className="error-message">{profileError}</p>
-                                <button 
-                                    type="button"
-                                    onClick={retryProfileFetch}
-                                    className="retry-button"
-                                >
-                                    Retry
-                                </button>
-                            </div>
-                        ) : (
-                            <ProfileDetailsComp
-                                profileDetailsOfUser={profileDetailsOfUser}
-                            />
-                        )}
-                        <hr className='separator'/>
-                        <FiltersGroup />
-                    </div>
-                    
-                    {isLoading ? (
-                        <div className="loading-container">
-                            <p>Loading jobs...</p>
-                        </div>
-                    ) : jobsError ? (
-                        <div className="error-container">
-                            <p className="error-message">{jobsError}</p>
-                            <button 
-                                type="button"
-                                onClick={retryJobsFetch}
-                                className="retry-button"
-                            >
-                                Retry
-                            </button>
-                        </div>
-                    ) : (
-                        <div className="jobs-list">
-                            {jobsData.length === 0 ? (
-                                <p>No jobs found</p>
-                            ) : (
-                                <p>Found {jobsData.length} jobs</p>
-                            )}
-                        </div>
-                    )}
+                <div className="side-bar">
+                    <ProfileDetailsComp
+                        profileDetailsOfUser={profileDetailsOfUser}
+                        profileApiStatus={profileApiStatus}
+                        retryProfileFetch={retryProfileFetch}
+                    />
+                    <hr className='separator'/>
+                    <FiltersGroup />
+                </div>
+                <div className="jobs-section">
+                    {renderJobsSection()}
                 </div>
             </div>
         </div>

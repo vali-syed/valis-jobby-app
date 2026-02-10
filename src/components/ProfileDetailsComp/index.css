@@ -5,3 +5,12 @@
     border-radius: 12px;
     height: 200px;
 }
+
+.profile-loader-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    color: #ffffff;
+    font-size: 16px;
+}
