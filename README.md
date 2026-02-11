@@ -1,146 +1,115 @@
-# 💼 Jobby App
+# Jobby App
 
-A modern, responsive job application platform built with React. Find your dream job and manage your applications all in one place.
-
-✅ **PROJECT COMPLETED SUCCESSFULLY** (Feb 11, 2026)
-
----
-
-## ✨ Features
-
-- 🏠 **Home Page** - Beautiful landing page with job listings
-- 🔐 **Login System** - Secure authentication with form validation
-- 📱 **Responsive Design** - Works seamlessly on all devices
-- 🎨 **Modern UI** - Clean and intuitive user interface
-- 🚀 **Fast Performance** - Optimized with React best practices
-- 🔍 **Job Search Functionality** - Easily search and filter job listings
-- 📊 **Job Filtering & Sorting** - Sort by relevance, date, and other criteria
+A modern, responsive job portal built with React.  
+Users can search jobs, apply filters, view detailed job descriptions, and manage their profile.
 
 ---
 
-## 🚀 Getting Started
+##  Features
+
+-  Authentication & protected routes  
+-  Home page with navigation  
+-  Job search & filtering  
+-  Detailed job view  
+-  Profile section  
+-  Failure & retry handling  
+-  Fully responsive UI  
+
+---
+
+##  Getting Started
 
 ### Prerequisites
-
-Make sure you have Node.js installed on your system:
-- Node.js (v14 or higher)
-- npm or yarn
+- Node.js  
+- npm  
 
 ### Installation
 
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/vali-syed/valis-jobby-app.git
-   cd valis-jobby-app
-   ```
+```bash
+git clone https://github.com/vali-syed/valis-jobby-app.git
+cd valis-jobby-app
+npm install
+npm start
+```
 
-2. **Install dependencies**
-   ```bash
-   npm install
-   ```
-
-3. **Start the development server**
-   ```bash
-   npm start
-   ```
-
-4. **Open your browser**
-   - Navigate to `http://localhost:3000`
-   - The app will automatically reload when you make changes
+Open  `http://localhost:3000`
 
 ---
 
-## 📜 Available Scripts
+##  Routes
 
-| Command | Description |
-|---------|-------------|
-| `npm start` | Runs the app in development mode |
-| `npm test` | Launches the test runner |
-| `npm run build` | Builds the app for production |
-| `npm run eject` | Ejects from Create React App (irreversible) |
+| Route | Description |
+|------|-------------|
+| `/login` | Login page |
+| `/` | Home page |
+| `/jobs` | Jobs listing with filters |
+| `/jobs/:id` | Individual job details |
+| `/profile` | User profile |
+| `*` | Not found |
 
 ---
 
-## 🗂️ Project Structure
+##  Project Structure
 
 ```
-valis-jobby-app/
-├── public/
-│   ├── index.html
-│   └── ...
-├── src/
-│   ├── components/
-│   │   ├── Header/
-│   │   ├── Home/
-│   │   ├── Login/
-│   │   └── NotFound/
-│   ├── App.js
-│   ├── App.css
-│   └── index.js
-├── package.json
-└── README.md
+src/
+├── components/
+│   ├── Header/
+│   ├── Home/
+│   ├── Login/
+│   ├── Jobs/
+│   ├── JobDetails/
+│   ├── JobsCard/
+│   ├── FiltersGroup/
+│   ├── ProfileDetailsComp/
+│   ├── ProtectedRoute/
+│   └── NotFound/
+│
+├── App.js
+├── index.js
+└── App.css
 ```
 
 ---
 
-## 🛣️ Routes
+##  Key Concepts Implemented
 
-- `/` - Home page with job listings
-- `/login` - User login page
-- `/not-found` - 404 error page
-- `*` - Redirects to not-found page
-
----
-
-## 🛠️ Technologies Used
-
-- **React** - UI library
-- **React Router DOM** - Routing and navigation
-- **CSS3** - Styling and animations
-- **Create React App** - Development environment
+- JWT authentication  
+- API integration  
+- Dynamic routing  
+- State management with React hooks  
+- Loading / failure / success views  
+- Reusable components  
 
 ---
 
-## ✅ Completed Features
+##  Tech Stack
 
-- [x] User authentication
-- [x] Job search functionality
-- [x] Job filtering and sorting
-- [x] Responsive design across all devices
-- [x] Modern and intuitive UI
-- [x] Fast performance optimization
+- React  
+- React Router DOM  
+- REST APIs  
+- CSS  
 
 ---
 
-## 🤝 Contributing
+##  Project Purpose
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+This project simulates a real-world job platform where:
 
-1. Fork the project
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+- routes are protected  
+- job id comes from URL  
+- data is fetched from APIs  
+- multiple UI states are handled  
 
----
-
-## 📝 License
-
-This project is licensed under the MIT License.
+Ideal for frontend practice and interviews.
 
 ---
 
-## 👨‍💻 Author
+##  Author
 
-**Vali Syed**
-- GitHub: [@vali-syed](https://github.com/vali-syed)
+**Vali Syed**  
+GitHub: https://github.com/vali-syed
 
 ---
-
-<div align="center">
-
-**Made with ❤️ using React**
 
 ⭐ Star this repo if you find it helpful!
-
-</div>
