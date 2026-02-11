@@ -14,13 +14,13 @@ const Header = () => {
 
     const onLogout = () =>{
         Cookies.remove("jwt_token");
-        navigate('/login',{replace:null});
+        navigate('/login',{replace:true});
     };
     
     return (
     <nav className="navbar">
         <div className="nav-container">
-            <Link to="/">
+            <Link to="/" >
             <img 
                 src="https://assets.ccbp.in/frontend/react-js/logo-img.png" 
                 alt="logo" 
@@ -29,13 +29,13 @@ const Header = () => {
             </Link>
             <ul className='nav-items'>
                 <li className="nav-item">
-                    <Link to="/">
+                    <Link to="/" class="job-link">
                         <span className='home-text-lg'>Home</span>
                         <AiFillHome className='home-icon-sm'/>
                     </Link>
                 </li>
                 <li className="nav-item">
-                    <Link to="/jobs">
+                    <Link to="/jobs" class="job-link">
                         <span className='jobs-text-lg'>Jobs</span>
                         <FaBriefcase className='job-icon-sm'/>
                     </Link>

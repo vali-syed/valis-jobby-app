@@ -14,6 +14,11 @@
     width: 100px;
 }
 
+.job-link{
+    text-decoration: none;
+    color: inherit;
+}
+
 .nav-items{
     list-style-type: none;
     display: flex;
@@ -80,6 +85,7 @@
     }
     .home-text-lg{
         display: block;
+        color: inherit;
     }
     .jobs-text-lg{
         display: block;
