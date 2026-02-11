@@ -1,0 +1,263 @@
+.job-details-page {
+    background-color: #000000;
+    min-height: 100vh;
+}
+
+.job-details-bg {
+    background-color: #121212;
+    padding: 40px 30px;
+    min-height: calc(100vh - 64px);
+}
+
+.job-details-content {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.job-details-card {
+    background-color: #202020;
+    border-radius: 12px;
+    padding: 24px;
+    color: #ffffff;
+}
+
+.job-card-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.company-logo {
+    width: 60px;
+    height: 60px;
+}
+
+.job-title-rating {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.job-title {
+    font-size: 20px;
+    margin: 0;
+}
+
+.job-rating {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.star-icon {
+    color: #fbbf24;
+}
+
+.rating-text {
+    margin: 0;
+}
+
+.job-card-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 16px;
+}
+
+.job-location-type {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.job-location,
+.job-employment-type {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.meta-icon {
+    color: #ffffff;
+}
+
+.meta-text {
+    margin: 0;
+}
+
+.job-package {
+    margin: 0;
+    font-weight: 500;
+}
+
+.job-card-separator {
+    border: 1px solid #2c2c2c;
+    margin: 16px 0;
+}
+
+.job-description-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+}
+
+.job-description-heading {
+    font-size: 18px;
+    margin: 0 0 8px 0;
+}
+
+.job-description-text {
+    margin: 0 0 24px 0;
+    line-height: 1.5;
+}
+
+.visit-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: #6366f1;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.external-link-icon {
+    font-size: 14px;
+}
+
+.section-heading {
+    font-size: 18px;
+    margin: 0 0 16px 0;
+}
+
+.skills-section {
+    margin-top: 16px;
+}
+
+.skills-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.skill-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 120px;
+}
+
+.skill-image {
+    width: 40px;
+    height: 40px;
+}
+
+.skill-name {
+    margin: 0;
+    font-size: 14px;
+}
+
+.life-at-company-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    margin-top: 32px;
+}
+
+.life-at-company-text {
+    flex: 1;
+}
+
+.life-at-company-description {
+    margin: 0;
+    line-height: 1.5;
+}
+
+.life-at-company-image {
+    width: 320px;
+    max-width: 100%;
+    border-radius: 8px;
+}
+
+.similar-jobs-section {
+    margin-bottom: 32px;
+}
+
+.similar-jobs-heading {
+    font-size: 22px;
+    color: #ffffff;
+    margin-bottom: 16px;
+}
+
+.similar-jobs-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 16px;
+}
+
+.similar-job-card {
+    background-color: #202020;
+    border-radius: 12px;
+    padding: 20px;
+    color: #ffffff;
+}
+
+.similar-job-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 12px;
+}
+
+.job-details-failure-view {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #ffffff;
+    min-height: 70vh;
+}
+
+.job-details-failure-image {
+    width: 260px;
+    max-width: 100%;
+    margin-bottom: 24px;
+}
+
+.failure-heading {
+    font-size: 22px;
+    margin-bottom: 8px;
+}
+
+.failure-description {
+    font-size: 16px;
+    color: #f1f5f9;
+    margin-bottom: 16px;
+}
+
+@media screen and (max-width: 767px) {
+    .job-details-bg {
+        padding: 24px 16px;
+    }
+
+    .job-card-meta {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    .life-at-company-section {
+        flex-direction: column;
+    }
+}
