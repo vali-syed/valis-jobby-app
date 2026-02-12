@@ -17,6 +17,14 @@ Users can search jobs, apply filters, view detailed job descriptions, and manage
 
 ---
 
+##  Demo Credentials
+
+Use the following credentials to test the application:
+
+**Username:** rahul  
+**Password:** rahul@2021
+
+
 ##  Getting Started
 
 ### Prerequisites
