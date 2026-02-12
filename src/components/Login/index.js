@@ -64,11 +64,11 @@ return (
           <img src="https://assets.ccbp.in/frontend/react-js/logo-img.png" alt="website-logo" className='website-logo'/>
         <div className='input-field-container'>
             <label htmlFor="username" className="input-field-label">USERNAME</label>
-            <input type="text" id="username" autoComplete = 'on' value={inputFieldValue} onChange={updateInputField} />
+            <input type="text" id="username" placeholder="Username" autoComplete = 'on' value={inputFieldValue} onChange={updateInputField} className="input-field" />
         </div>
         <div className='password-field-container'>
             <label htmlFor='password' className='input-field-label'>PASSWORD</label>
-            <input type="password" id="password" value={passwordFieldValue} onChange={updatePasswordField} />
+            <input type="password" id="password" placeholder="Password" value={passwordFieldValue} onChange={updatePasswordField} className = "password-field" />
         </div>
         <div>   
             {errMsg && <p className="err-msg">{errMsg}</p>}

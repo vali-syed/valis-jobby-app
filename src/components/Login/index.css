@@ -22,7 +22,7 @@
     flex-direction:column;
     align-items: center;
     width: 90%;
-    max-width: 420px;
+    max-width: 400px;
     border-radius: 10px;
 }
 
@@ -32,16 +32,35 @@
     align-self: center;
 }
 
+.input-field{
+    border: 1px solid  #7e858e;
+    background-color: #272727;
+    padding: 5px;
+    height: 24px;
+    width: 100%;
+    color: #ffffff;
+}
+.password-field{
+    border: 1px solid  #7e858e;
+    height: 24px;
+    padding: 5px;
+    color: #ffffff;
+    width: 100%;
+    background-color: #272727;
+}
+
 .input-field-container{
     display: flex;
     flex-direction: column;
     margin-bottom: 20px;
+    flex-grow: 1;
 }
 
 .password-field-container{
     display: flex;
     flex-direction: column;
     margin-bottom: 20px;
+    flex-grow: 1;
 }
 
 .submit-button{
@@ -60,9 +79,15 @@
 }
 
 .input-field-label{
-    font-family: "roboto";
-    font-size: 18px;
+    margin-bottom: 5px;
+    font-size: 10px;
     flex-grow:1;
     font-weight: 500;
     color: #ffffff;
+}
+
+@media screen and (min-width:768px) {
+    .input-field-label{
+        font-size: 12px;
+    }
 }
